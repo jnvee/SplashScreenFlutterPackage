@@ -43,6 +43,8 @@ class SplashScreen extends StatefulWidget {
 
   /// Whether to display a loader or not
   final bool useLoader;
+  ///A custom loader, it can be any kind of animation.
+  final Widget loader;
 
   /// Custom page route if you have a custom transition you want to play
   final Route pageRoute;
@@ -57,6 +59,7 @@ class SplashScreen extends StatefulWidget {
     this.navigateAfterFuture,
     @required this.seconds,
     this.photoSize,
+    this.loader,
     this.pageRoute,
     this.onClick,
     this.navigateAfterSeconds,
@@ -166,16 +169,12 @@ class _SplashScreenState extends State<SplashScreen> {
                   )),
                 ),
                 Expanded(
-                  flex: 1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       !widget.useLoader
                           ? Container()
-                          : CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  widget.loaderColor),
-                            ),
+                          : widget.loader,
                       Padding(
                         padding: const EdgeInsets.only(top: 20.0),
                       ),
